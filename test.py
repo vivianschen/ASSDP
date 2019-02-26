@@ -11,7 +11,7 @@ SMOOTHING_SIZE_SEC = 2.5
 
 # Number of samples to consider in one chunk.
 # Smaller values take more time, but are more accurate
-N_FFT = 2**10
+N_FFT = 2**7
 
 # For line detection
 LINE_THRESHOLD = 0.15
@@ -94,7 +94,7 @@ def count_overlapping_lines(lines, margin, min_length_samples):
     return line_scores
 
 def sorted_segments(line_scores):
-    """Return the best line, sorted first by chorus matches, then by duration"""
+    """Return the p line, sorted first by chorus matches, then by duration"""
     lines_to_sort = []
     for line in line_scores:
         lines_to_sort.append((line, line_scores[line], line.end - line.start))
@@ -103,7 +103,9 @@ def sorted_segments(line_scores):
     return lines_to_sort
 
 clip_length = 10
-chroma, song_wav_data, sr, song_length_sec = create_chroma("bad_romance.wav")
+chroma, song_wav_data, sr, song_length_sec = create_chroma("foo.wav")
+
+
 
 time_time_similarity = TimeTimeSimilarityMatrix(chroma, sr)
 time_lag_similarity = TimeLagSimilarityMatrix(chroma, sr)
@@ -124,34 +126,55 @@ lines = detect_lines(time_lag_similarity.matrix, candidate_rows,
 if len(lines) == 0:
     print("No choruses were detected. Try a smaller search duration")
 
+
+
 line_scores = count_overlapping_lines(
     lines, OVERLAP_PERCENT_MARGIN * clip_length_samples,
     clip_length_samples)
 
+
 choruses = sorted_segments(line_scores)
 
+
+
 unsorted_chorus_times = []
+
 for c in choruses:
-    unsorted_chorus_times.append(c[0].start / chroma_sr)
+    unsorted_chorus_times.append((c[0].start / chroma_sr, c[0].end / chroma_sr))
 
-unsorted_chorus_times.sort()
-print(unsorted_chorus_times)
+#pdb.set_trace()
+unsorted_chorus_times.sort(key=lambda x: x[0])
+#print(unsorted_chorus_times)
 
+
+#merge overlapping intervals!!
 chorus_times = []
 chorus_times.append(unsorted_chorus_times[0])
 for i in range(1, len(unsorted_chorus_times)):
     #pdb.set_trace()
-    if (unsorted_chorus_times[i] - chorus_times[-1]) >= clip_length:
+    if (unsorted_chorus_times[i][0] - chorus_times[-1][0]) >= clip_length:
         chorus_times.append(unsorted_chorus_times[i])
 
-print(chorus_times)
+chorus_times = [list(i) for i in chorus_times]
+merged_chorus_times = []
+merged_chorus_times.append(chorus_times[0])
+for curr in chorus_times:
+    prev = merged_chorus_times[-1]
+    if curr[0] <= prev[1]:
+        #pdb.set_trace()
+        prev[1] = max(prev[1], curr[1])
+    else:
+        merged_chorus_times.append(curr)
+
+print(merged_chorus_times)
+
 
 
 idx = 0
-for time in chorus_times:
+for time in merged_chorus_times:
     print("chorus found at {0:g} min {1:.2f} sec".format(
-            time // 60, time % 60))
-    chorus_wave_data = song_wav_data[int(time*sr) : int((time+clip_length)*sr)]
+            time[0] // 60, time[0] % 60))
+    chorus_wave_data = song_wav_data[int(time[0]*sr) : int(time[1]*sr)]
     sf.write("repeated_segment_{}.wav".format(idx), chorus_wave_data, sr)
     idx += 1
 #time_lag_similarity.display()
