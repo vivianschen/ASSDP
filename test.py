@@ -1,10 +1,19 @@
 import pdb
 import numpy as np
 import scipy.signal
+import scipy.misc
 import librosa
+import librosa.display
 import soundfile as sf
+import matplotlib
+import matplotlib.pyplot as plt
+import cv2
+import imutils
+import pylab
 from pychorus import create_chroma
 from pychorus.similarity_matrix import TimeTimeSimilarityMatrix, TimeLagSimilarityMatrix, Line
+import msaf
+import sys
 
 # Denoising size in seconds
 SMOOTHING_SIZE_SEC = 2.5
@@ -16,7 +25,7 @@ N_FFT = 2**7
 # For line detection
 LINE_THRESHOLD = 0.15
 MIN_LINES = 10
-NUM_ITERATIONS = 10
+NUM_ITERATIONS = 20
 
 # We allow an error proportional to the length of the clip
 OVERLAP_PERCENT_MARGIN = 0.2
@@ -102,17 +111,59 @@ def sorted_segments(line_scores):
     lines_to_sort.sort(key=lambda x: (x[1], x[2]), reverse=True)
     return lines_to_sort
 
-clip_length = 10
-chroma, song_wav_data, sr, song_length_sec = create_chroma("foo.wav")
 
 
 
+chroma, song_wav_data, sr, song_length_sec = create_chroma("audio/sandstorm.wav")
+
+num_samples = chroma.shape[1]
 time_time_similarity = TimeTimeSimilarityMatrix(chroma, sr)
 time_lag_similarity = TimeLagSimilarityMatrix(chroma, sr)
 
-num_samples = chroma.shape[1]
+time_time_similarity.display()
+
+#novelty based segmentation
+#uses the foote or checkerboard kernel method of segmenting songs
+sonified_file = "my_boundaries.wav"
+boundaries, labels = msaf.process("audio/sandstorm.wav", boundaries_id="foote", plot=True,
+                                    sonify_bounds=True,labels_id="fmc2d",
+                                  out_bounds=sonified_file, out_sr=sr)
+
+print(boundaries)
+print(labels)
+#audio = librosa.load(sonified_file, sr=sr)[0]
+
+idx = 0
+for x in range(len(boundaries) - 1):
+    if boundaries[x + 1] - boundaries[x] >= 1:
+        print("segment found at {0:g} min {1:.2f} sec".format(
+                boundaries[x] // 60, boundaries[x] % 60))
+        segment_wav_data = song_wav_data[int(boundaries[x]*sr) : int(boundaries[x + 1]*sr)]
+        sf.write("segment_{}.wav".format(idx), segment_wav_data, sr)
+    idx += 1
+
+
+
+
+sys.exit(1)
+
+
+
+
+
+
+R = librosa.segment.recurrence_matrix(time_time_similarity.matrix, mode='affinity')
+plt.imshow(R)
+librosa.display.specshow(R, x_axis='time', y_axis='time', sr=time_time_similarity.sample_rate / (N_FFT / 2048))
+
+plt.show()
+
+time_time_similarity.display()
+time_lag_similarity.display()
+
 
 chroma_sr = num_samples / song_length_sec
+clip_length = 10
 smoothing_size_samples = int(SMOOTHING_SIZE_SEC * chroma_sr)
 time_lag_similarity.denoise(time_time_similarity.matrix,
                             smoothing_size_samples)
@@ -120,8 +171,11 @@ time_lag_similarity.denoise(time_time_similarity.matrix,
 clip_length_samples = clip_length * chroma_sr
 
 candidate_rows = local_maxima_rows(time_lag_similarity.matrix)
+
+
 lines = detect_lines(time_lag_similarity.matrix, candidate_rows,
                      clip_length_samples)
+
 
 if len(lines) == 0:
     print("No choruses were detected. Try a smaller search duration")
@@ -134,8 +188,6 @@ line_scores = count_overlapping_lines(
 
 
 choruses = sorted_segments(line_scores)
-
-
 
 unsorted_chorus_times = []
 
@@ -154,24 +206,23 @@ for i in range(1, len(unsorted_chorus_times)):
     #pdb.set_trace()
     if (unsorted_chorus_times[i][0] - chorus_times[-1][0]) >= clip_length:
         chorus_times.append(unsorted_chorus_times[i])
-
-chorus_times = [list(i) for i in chorus_times]
-merged_chorus_times = []
-merged_chorus_times.append(chorus_times[0])
-for curr in chorus_times:
-    prev = merged_chorus_times[-1]
-    if curr[0] <= prev[1]:
-        #pdb.set_trace()
-        prev[1] = max(prev[1], curr[1])
-    else:
-        merged_chorus_times.append(curr)
-
-print(merged_chorus_times)
-
+#
+# chorus_times = [list(i) for i in chorus_times]
+# merged_chorus_times = []
+# merged_chorus_times.append(chorus_times[0])
+# for curr in chorus_times:
+#     prev = merged_chorus_times[-1]
+#     if curr[0] <= prev[1]:
+#         #pdb.set_trace()
+#         prev[1] = max(prev[1], curr[1])
+#     else:
+#         merged_chorus_times.append(curr)
+#
+# print(merged_chorus_times)
 
 
 idx = 0
-for time in merged_chorus_times:
+for time in chorus_times:
     print("chorus found at {0:g} min {1:.2f} sec".format(
             time[0] // 60, time[0] % 60))
     chorus_wave_data = song_wav_data[int(time[0]*sr) : int(time[1]*sr)]
