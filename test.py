@@ -7,8 +7,6 @@ import librosa.display
 import soundfile as sf
 import matplotlib
 import matplotlib.pyplot as plt
-import cv2
-import imutils
 import pylab
 from pychorus import create_chroma
 from pychorus.similarity_matrix import TimeTimeSimilarityMatrix, TimeLagSimilarityMatrix, Line
@@ -113,19 +111,19 @@ def sorted_segments(line_scores):
 
 
 
-
-chroma, song_wav_data, sr, song_length_sec = create_chroma("audio/sandstorm.wav")
+file_name = "beethoven.wav"
+chroma, song_wav_data, sr, song_length_sec = create_chroma("audio/" + file_name)
 
 num_samples = chroma.shape[1]
 time_time_similarity = TimeTimeSimilarityMatrix(chroma, sr)
 time_lag_similarity = TimeLagSimilarityMatrix(chroma, sr)
 
-time_time_similarity.display()
+#time_time_similarity.display()
 
 #novelty based segmentation
 #uses the foote or checkerboard kernel method of segmenting songs
 sonified_file = "my_boundaries.wav"
-boundaries, labels = msaf.process("audio/sandstorm.wav", boundaries_id="foote", plot=True,
+boundaries, labels = msaf.process("audio/" + file_name, boundaries_id="foote", plot=False,
                                     sonify_bounds=True,labels_id="fmc2d",
                                   out_bounds=sonified_file, out_sr=sr)
 
@@ -142,7 +140,11 @@ for x in range(len(boundaries) - 1):
         sf.write("segment_{}.wav".format(idx), segment_wav_data, sr)
     idx += 1
 
-
+alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+frames = open("labels/" + file_name + "_labels.txt", "w")
+for e in range(len(boundaries)-1):
+    outer_bound = e+1
+    frames.write(str(boundaries[e]) + "\t" + str(boundaries[outer_bound]) + "\t" + alphabet[int(labels[e])] + "\n")
 
 
 sys.exit(1)
@@ -219,7 +221,6 @@ for i in range(1, len(unsorted_chorus_times)):
 #         merged_chorus_times.append(curr)
 #
 # print(merged_chorus_times)
-
 
 idx = 0
 for time in chorus_times:
