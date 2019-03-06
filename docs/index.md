@@ -1,8 +1,7 @@
 ---
 layout: default
-title: ASSDP
+title: Automatic Song Structure Detection Program
 ---
 
-# Automatic Song Structure Detection Program
+### Karen Bao, Stacey Chao, Vivian Chen
 
-Members: Karen Bao, Stacey Chao, Vivian Chen
