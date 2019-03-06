@@ -1,5 +1,8 @@
-# ASSDP: Automatic Song Structure Detection Program
+---
+layout: default
+title: ASSDP
+---
 
-## EECS352 Final Project
+# Automatic Song Structure Detection Program
 
 Members: Karen Bao, Stacey Chao, Vivian Chen
