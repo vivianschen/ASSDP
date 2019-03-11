@@ -264,27 +264,51 @@ for x in range(len(new_boundaries)):
 '''
 # OUR NORMALIZATION METHOD 2: NORMALIZE TO VALUES BETWEEN 0 AND 1
 
+#initialize
+similarity_measures = []
+
 euclidean_norm = lambda x, y: np.abs(x - y)
 for x in range(len(new_boundaries)):
     chorus_sect = -1
     dist = fastdtw(mfccs[x], chorus_mfcc, dist=euclidean_norm)
     similarity_measures.append(dist)
 
+print("Similarities: ", similarity_measures)
 normalized = [float(i)/max(similarity_measures) for i in similarity_measures]
 print("Normalized similarities: ", normalized)
 
 #get lowest third of normalized array, use as threshold
 sorted_norms = sorted(normalized)
-bottom_34 = sorted_norms[int(len(sorted_norms) * 0) : int(len(sorted_norms) * .34)]
 
+#get max and min values
+max_dist = 0
+min_dist = 100
+euclidean_norm = lambda x, y: np.abs(x - y)
+for x in range(len(new_boundaries)):
+    chorus_sect = -1
+    dist = fastdtw(mfccs[x], chorus_mfcc, dist=euclidean_norm)
+    if dist > max_dist:
+        max_dist = dist
+    if dist < min_dist:
+        min_dist = dist
+        
+difference = max_dist - min_dist
+print("difference: ", difference)
+if difference <= 2:
+    bottom = sorted_norms[int(len(sorted_norms) * 0) : int(len(sorted_norms) * .5)]
+else:
+    bottom = sorted_norms[int(len(sorted_norms) * 0) : int(len(sorted_norms) * .40)]
+print("bottom: ", bottom)
+print("threshold: ", bottom[-1])
 for x in range(len(new_boundaries)):
     chorus_sect = -1
     #TODO: normalize threshold
-    if normalized[x] <= bottom_34[-1]: 
+    if normalized[x] <= bottom[-1]: 
         structure_labels[x] = "chorus"
     #print(dist)
     #print()
     similarity_measures.append(dist)
+print(structure_labels)
 print(similarity_measures)
 #print(structure_labels) 
 
@@ -293,11 +317,11 @@ print(similarity_measures)
 for x in range(len(new_boundaries)):
     found_match = False
     for y in range(x + 1, len(new_boundaries)):
-        if (new_labels[x] == new_labels[y]) and structure_labels[y] == "":
+        if (new_labels[x] == new_labels[y]) and structure_labels[y] == "" and structure_labels[x] == "":
             found_match = True
             structure_labels[x] = "verse"
             structure_labels[y] = "verse"
-    if found_match == False and structure_labels[x] == "":
+    if found_match == False and structure_labels[x] == "" and structure_labels[x] == "":
         if x == 0:
             structure_labels[x] = "intro"
         elif x == (len(new_boundaries) - 1):
