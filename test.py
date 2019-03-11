@@ -273,14 +273,14 @@ for x in range(len(new_boundaries)):
 normalized = [float(i)/max(similarity_measures) for i in similarity_measures]
 print("Normalized similarities: ", normalized)
 
-#get lowest 25% of normalized array, use as threshold
+#get lowest third of normalized array, use as threshold
 sorted_norms = sorted(normalized)
-bottom_25 = sorted_norms[int(len(sorted_norms) * 0) : int(len(sorted_norms) * .34)]
+bottom_34 = sorted_norms[int(len(sorted_norms) * 0) : int(len(sorted_norms) * .34)]
 
 for x in range(len(new_boundaries)):
     chorus_sect = -1
     #TODO: normalize threshold
-    if normalized[x] <= bottom_25[-1]: 
+    if normalized[x] <= bottom_34[-1]: 
         structure_labels[x] = "chorus"
     #print(dist)
     #print()
