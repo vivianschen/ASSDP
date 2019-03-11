@@ -249,6 +249,8 @@ chorus_mfcc = np.average(librosa.feature.mfcc(best_chorus, sr), axis=0)
 
 structure_labels = [""] * len(new_labels)
 
+'''
+#ORIGINAL HARD THRESHOLD = 2
 euclidean_norm = lambda x, y: np.abs(x - y)
 for x in range(len(new_boundaries)):
     chorus_sect = -1
@@ -259,6 +261,34 @@ for x in range(len(new_boundaries)):
         structure_labels[x] = "chorus"
     print(dist)
     print()
+'''
+# OUR NORMALIZATION METHOD 2: NORMALIZE TO VALUES BETWEEN 0 AND 1
+
+euclidean_norm = lambda x, y: np.abs(x - y)
+for x in range(len(new_boundaries)):
+    chorus_sect = -1
+    dist = fastdtw(mfccs[x], chorus_mfcc, dist=euclidean_norm)
+    similarity_measures.append(dist)
+
+normalized = [float(i)/max(similarity_measures) for i in similarity_measures]
+print("Normalized similarities: ", normalized)
+
+#get lowest 25% of normalized array, use as threshold
+sorted_norms = sorted(normalized)
+bottom_25 = sorted_norms[int(len(sorted_norms) * 0) : int(len(sorted_norms) * .34)]
+
+for x in range(len(new_boundaries)):
+    chorus_sect = -1
+    #TODO: normalize threshold
+    if normalized[x] <= bottom_25[-1]: 
+        structure_labels[x] = "chorus"
+    #print(dist)
+    #print()
+    similarity_measures.append(dist)
+print(similarity_measures)
+#print(structure_labels) 
+
+
 
 for x in range(len(new_boundaries)):
     found_match = False
