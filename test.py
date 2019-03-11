@@ -13,7 +13,7 @@ from pychorus import create_chroma
 from pychorus.similarity_matrix import TimeTimeSimilarityMatrix, TimeLagSimilarityMatrix, Line
 import msaf
 import sys
-from dtw import dtw, accelerated_dtw
+#from dtw import dtw, accelerated_dtw
 from scipy.spatial.distance import cdist
 from math import isinf
 
@@ -213,7 +213,7 @@ for c in choruses:
 unsorted_chorus_times.sort(key=lambda x: x[0])
 #print(unsorted_chorus_times)
 
-merge overlapping intervals!!
+#merge overlapping intervals!!
 chorus_times = []
 chorus_times.append(unsorted_chorus_times[0])
 for i in range(1, len(unsorted_chorus_times)):
