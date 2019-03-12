@@ -297,7 +297,7 @@ print("difference: ", difference)
 if difference <= 2:
     bottom = sorted_norms[int(len(sorted_norms) * 0) : int(len(sorted_norms) * .5)]
 else:
-    bottom = sorted_norms[int(len(sorted_norms) * 0) : int(len(sorted_norms) * .40)]
+    bottom = sorted_norms[int(len(sorted_norms) * 0) : int(len(sorted_norms) * .45)]
 print("bottom: ", bottom)
 print("threshold: ", bottom[-1])
 for x in range(len(new_boundaries)):
