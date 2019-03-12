@@ -4,7 +4,7 @@ title: Automatic Song Structure Detection Program
 ---
 ## A Study on Machine vs. Human Perception of Pop Song Structure
 
-### Karen Bao, Stacey Chao, Vivian Chen <br/>
+### feat. Karen Bao, Stacey Chao, Vivian Chen <br/>
 
 
 ## Intro 
@@ -17,5 +17,9 @@ Structure is one of the key characteristics that makes a song catchy by providin
 We created our program by building off of two sources of code: Oriol Nieto's song segmenter (https://github.com/urinieto/msaf) and Vivek Jayaram's chorus detector (https://github.com/vivjay30/pychorus). 
 
 ## Chorus
+
+
+## Verse
+User testing was done on 9 subjects, all of whom are college students who listen to pop songs regularly. 
 
 ## Outro
