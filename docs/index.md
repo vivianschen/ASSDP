@@ -14,11 +14,11 @@ Structure is one of the key characteristics that makes a song catchy by providin
 
 ## Verse
 
-We created our program by building off of two sources of code: Oriol Nieto's song segmenter (https://github.com/urinieto/msaf) and Vivek Jayaram's chorus detector (https://github.com/vivjay30/pychorus). The chorus detector determined the chorus based on repetition (the more it repeated, the more likely it was a chorus), but it turned out to fail for many songs. We improved it by incorporating Librosa's beat onset feature - the stronger the beat onsets in a section, the more likely it is a chorus. To determine the remaining segments (particularly verses), we used dynamic time warping (https://pypi.org/project/fastdtw/) to calculate similarity measures between the segments. If the first or final segments were unique, they were assigned as "intro" or "outro", respectively.
+We created our program by building off of two sources of code: Oriol Nieto's song segmenter ([https://github.com/urinieto/msaf](https://github.com/urinieto/msaf)) and Vivek Jayaram's chorus detector ([https://github.com/vivjay30/pychorus](https://github.com/vivjay30/pychorus)). The chorus detector determined the chorus based on repetition (the more it repeated, the more likely it was a chorus), but it turned out to fail for many songs. We improved it by incorporating Librosa's beat onset feature - the stronger the beat onsets in a section, the more likely it is a chorus. To determine the remaining segments (particularly verses), we used dynamic time warping ([https://pypi.org/project/fastdtw/](https://pypi.org/project/fastdtw/)) to calculate similarity measures between the segments. If the first or final segments were unique, they were assigned as "intro" or "outro", respectively.
 
 
 ## Chorus
-Our program returns a text file delimiting the time stamps of each segment of a song, which we uploaded into Audacity (https://manual.audacityteam.org/man/creating_and_selecting_labels.html) to get the following: 
+Our program returns a text file delimiting the time stamps of each segment of a song, which we uploaded into Audacity ([https://manual.audacityteam.org/man/creating_and_selecting_labels.html]https://manual.audacityteam.org/man/creating_and_selecting_labels.html)) to get the following: 
 
 
 ## Verse
