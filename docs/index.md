@@ -18,7 +18,7 @@ We created our program by building off of two sources of code: Oriol Nieto's son
 
 
 ## Chorus
-Our program returns a text file delimiting the time stamps of each segment of a song, which we uploaded into Audacity ([https://manual.audacityteam.org/man/creating_and_selecting_labels.html]https://manual.audacityteam.org/man/creating_and_selecting_labels.html)) to get the following: 
+Our program returns a text file delimiting the time stamps of each segment of a song, which we uploaded into Audacity ([https://manual.audacityteam.org/man/creating_and_selecting_labels.html](https://manual.audacityteam.org/man/creating_and_selecting_labels.html)) to get the following: 
 
 
 ## Verse
