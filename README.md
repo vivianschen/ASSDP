@@ -1,5 +1,17 @@
-# ASSDP: Automatic Song Structure Detection Program
+# Automatic Song Structure Detection Program
+### Stacey Chao, Vivien Chen, Karen Bao
+### EECS 352 Final Project
 
-## EECS352 Final Project
+## Dependencies
+- numpy
+- scipy
+- librosa
+- matplotlib
+- [pychorus](https://github.com/vivjay30/pychorus)
+- [MSAF](https://github.com/urinieto/msaf)
 
-Members: Karen Bao, Stacey Chao, Vivian Chen
+## To Run
+-  Have a folder called "audio" and a folder called "labels" in the same folder as main.py
+-  No content needs to be in "labels", but the "audio" should have all the wav files of
+   the songs you want to read in
+-  Run `$ python3 main.py` and input the exact audio file name (ex. call_me_maybe.wav)
