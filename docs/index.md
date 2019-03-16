@@ -8,27 +8,51 @@ title: Automatic Song Structure Detection Program
 
 
 ## Intro 
+<p align="center" >
+<img src=https://flypaper.soundfly.com/wp-content/uploads/2018/01/songstructure-grid.png></p>
 
-Structure is one of the key characteristics that makes a song catchy by providing a balance between repetition and variation (despite the fact that we aren't always actively aware of it when we're listening to the song). Songs usually consist of a few different sections: Intro, Verse, Chorus, Bridge (or Transition), and Outro. Sometimes it is obvious where each section ends/begins and whether a section is the chorus, verse, etc.; other times...not so much. In this project, we focus on pop songs and whether machines can detect song structure better than humans can, especially when a song's structure is vague even to human ears. 
+
+Structure makes a song catchy providing a balance between repetition and variation, despite the fact that we aren’t always actively aware of it when we’re listening to the song. Songs usually consist of a few different sections: intro, verse, chorus, bridge (or transition), and outro. Sometimes it is obvious where each section ends/begins and whether a section is the chorus, verse, etc.; other times…not so much. In this project, we focus on pop songs and whether machines perceive/detect structures similar to how people detect them, especially when a song’s structure is vague even to human ears.
 
 
 ## How We Built It
 
-We created our program by building off of two sources of code: Oriol Nieto's song segmenter ([https://github.com/urinieto/msaf](https://github.com/urinieto/msaf)) and Vivek Jayaram's chorus detector ([https://github.com/vivjay30/pychorus](https://github.com/vivjay30/pychorus)). The chorus detector originally determined the chorus based on repetition (the more it repeated, the more likely it was a chorus), but it turned out to fail for many songs. We improved it by incorporating [Librosa](https://librosa.github.io/librosa/)'s beat onset feature (the stronger the beat onsets a section had, the more likely it was a chorus). We then assigned the chorus to the segments from the segmenter that matched best to the chorus detected by the chorus detector. To determine the remaining segments (particularly verses), we used dynamic time warping ([https://pypi.org/project/fastdtw/](https://pypi.org/project/fastdtw/)) to calculate similarity measures between the segments. If the first or final segments were unique, they were assigned as "intro" or "outro", respectively.
+We created our program by building off of two sources of code: Oriol Nieto's [song segmenter](https://github.com/urinieto/msaf) and Vivek Jayaram's [chorus detector](https://github.com/vivjay30/pychorus). We used MSAF to run a novelty-based segmentation and labeling algorithm. Specifically, we used a checkerboard kernel method of audio segmentation proposed by Jonathan Foote, and a 2D Fourier Magnitude Coefficients Method as proposed by Oriol Nieto and Juan Pablo Bello. Running this algorithm on the song would give the perceived segments of a song, and generic segment labels (1, 2, 1, 2, 3, etc.)
+
+
+
+The chorus detector is a simplified version of an algorithm proposed by a paper by Masatako Goto. However, the detector determines the chorus based on repetition (the more it repeated, the more likely it was a chorus), but not on musical characteristics. This turned out to misidentify choruses on a large majority of songs, so we modified the algorithm to return all repeated segments. We then used [Librosa](https://librosa.github.io/librosa/)’s beat onset feature to identify which segment was most likely to be the chorus, using the logic that the segment with the highest average beat onset would be considered the chorus. 
+
+
+
+Now that we had the identified chorus, we then looped through the detected segments from the segmenter and found the best matching segments to the detected chorus. This matching was done using dynamic time warping (using a modified version of the algorithm from [https://pypi.org/project/fastdtw/](https://pypi.org/project/fastdtw/)). If the similarity between the segment and the detected chorus was under a certain value, then that segment would then be labeled a chorus.
+
+The other segments were determined through the previous labels given by the 2D Fourier Magnitude Coefficient labeling algorithm. If a segment was repeating but had not been labeled as a chorus, it was then labeled as a verse. If the segment was unique and in the middle of a song, it was considered a transition. If the first or final segments were unique, they were assigned as “intro” or “outro”, respectively.
+
 
 
 ## The Program
 
-Our program returns a text file delimiting the time stamps of each segment of a song, which we uploaded into Audacity ([https://manual.audacityteam.org/man/creating_and_selecting_labels.html](https://manual.audacityteam.org/man/creating_and_selecting_labels.html)). 
+Our program returns a text file delimiting the time stamps of each segment of a song, which we uploaded into [Audacity](https://manual.audacityteam.org/man/creating_and_selecting_labels.html). 
 
 ## User Testing
 
-User testing was run on 9 subjects, all of whom are college students who listen to pop songs regularly. We used 4 genres of pop songs in different languages (American pop, Japanese pop, Korean pop, Chinese pop) because we feel that language should have no effect on one's perception of song structure, with hard and easy songs each. Their task was to give timestamps for each of the sections (Intro, Verse, Chorus, Bridge, Outro) that they heard.  
+We ran user testing on 9 subjects, all of whom are college students who listen to pop songs regularly. Each user listened to 2 random pop songs, one with a relatively simple structure one and one with a more complex structure, from 4 different genres of pop: American pop, Japanese pop, Korean pop, and Chinese pop. We used different genre of pop to ensure that user would not be familiar with all the songs. We also wanted to highlight than an understanding of the lyrics of a song would not affect one’s perception of the song’s structure. 
+
+The user’s task was to give the start and stop timestamps of each particular section (intro, verse, chorus, transition, outro) that they had heard. The users were told that the song could only have one intro and one outro, but could have any number of verse, chorus, and transition segments. The segments could also not be numbered (i.e. verse 1, chorus 2,. etc).
+
 
 
 ## Results
-Here are some examples of comparisons of user labels vs. labels generated from our program. See what you agree with!
+
+Here are some examples of comparisons of user labels vs. labels generated from our program. The labels generated from the program are always the labels on the last row (see screenshots). See what you agree with!
+
+
+## Future Work
+
+In the future, we would like to improve our chorus detection algorithm. Currently the two features we use to detect the chorus are beat onsets and repetition, but we would also want to use such features like chord progression, frequency bands, peak strength, and maybe even vocal analysis. We believe the inclusion of such features would help our algorithm match how a regular person would try to segment a song. In general, the checkerboard kernel method was a decent method of segmenting songs, but we could also experiment with different algorithms. We would also want to rely less on the labels given by the 2D-Fourier Magnitude Coefficients algorithm, and use our own method of determining a general song structure. Finally, we would want to expand our user study to have a larger sample population, in order to more clearly see trends and patterns in user labeling. 
 
 
 ## In Conclusion...
-People have extremely different ideas of how a song is structured, especially for hard songs; someone's verse might be someone else's chorus. Some users' labels even are similar to those generated by the program while very different from other users' labels. So...what is song structure?!?! How do we define "verse", "chorus", and "transition"?
+
+People have extremely different ideas of how a song is structured, especially for hard songs; someone’s verse might be someone else’s chorus. Some users’ labels even are similar to those generated by the program while very different from other users’ labels. In the end, what really defines song structure? How can we even identify common segments within a song, such as a “verse”, “chorus”, and “transition”? While there may not be a single general method of determining structure, it is valuable to study how different users can perceive them, and if one can get machines to replicate such reasoning. 
