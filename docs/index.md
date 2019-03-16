@@ -8,8 +8,7 @@ title: Automatic Song Structure Detection Program
 
 
 ## Intro 
-<p align="center" >
-<img src=https://flypaper.soundfly.com/wp-content/uploads/2018/01/songstructure-grid.png></p>
+<img src="images/structure.png" class="inline"/>
 
 
 Structure makes a song catchy providing a balance between repetition and variation, despite the fact that we aren’t always actively aware of it when we’re listening to the song. Songs usually consist of a few different sections: intro, verse, chorus, bridge (or transition), and outro. Sometimes it is obvious where each section ends/begins and whether a section is the chorus, verse, etc.; other times…not so much. In this project, we focus on pop songs and whether machines perceive/detect structures similar to how people detect them, especially when a song’s structure is vague even to human ears.
@@ -17,15 +16,13 @@ Structure makes a song catchy providing a balance between repetition and variati
 
 ## How We Built It
 
-We created our program by building off of two sources of code: Oriol Nieto's [song segmenter](https://github.com/urinieto/msaf) and Vivek Jayaram's [chorus detector](https://github.com/vivjay30/pychorus). We used MSAF to run a novelty-based segmentation and labeling algorithm. Specifically, we used a checkerboard kernel method of audio segmentation proposed by Jonathan Foote, and a 2D Fourier Magnitude Coefficients Method as proposed by Oriol Nieto and Juan Pablo Bello. Running this algorithm on the song would give the perceived segments of a song, and generic segment labels (1, 2, 1, 2, 3, etc.)
+We created our program by building off of two sources of code: Oriol Nieto's [song segmenter](https://github.com/urinieto/msaf) and Vivek Jayaram's [chorus detector](https://github.com/vivjay30/pychorus). We used MSAF to run a novelty-based segmentation and labeling algorithm. Specifically, we used a [checkerboard kernel method](https://www.fxpal.com/publications/automatic-audio-segmentation-using-a-measure-of-audio-novelty.pdf) of audio segmentation proposed by Jonathan Foote, and a [2D Fourier Magnitude Coefficients Method](http://www.mirlab.org/conference_papers/International_Conference/ICASSP%202014/papers/p664-nieto.pdf) as proposed by Oriol Nieto and Juan Pablo Bello. Running this algorithm on the song would give the perceived segments of a song and generic segment labels (1, 2, 1, 2, 3, etc.).
 
 
-
-The chorus detector is a simplified version of an algorithm proposed by a paper by Masatako Goto. However, the detector determines the chorus based on repetition (the more it repeated, the more likely it was a chorus), but not on musical characteristics. This turned out to misidentify choruses on a large majority of songs, so we modified the algorithm to return all repeated segments. We then used [Librosa](https://librosa.github.io/librosa/)’s beat onset feature to identify which segment was most likely to be the chorus, using the logic that the segment with the highest average beat onset would be considered the chorus. 
-
+The chorus detector is a simplified version of an algorithm presented by a [paper](https://staff.aist.go.jp/m.goto/PAPER/IEEETASLP200609goto.pdf) by Masatako Goto. However, the detector determines the chorus based on repetition (the more it repeated, the more likely it was a chorus), not on musical characteristics. This turned out to misidentify choruses on a large majority of songs, so we modified the algorithm to return all repeated segments. We then used [Librosa](https://librosa.github.io/librosa/)’s beat onset feature to identify which segment was most likely to be the chorus, using the logic that the segment with the highest average beat onset would be considered the chorus. 
 
 
-Now that we had the identified chorus, we then looped through the detected segments from the segmenter and found the best matching segments to the detected chorus. This matching was done using dynamic time warping (using a modified version of the algorithm from [https://pypi.org/project/fastdtw/](https://pypi.org/project/fastdtw/)). If the similarity between the segment and the detected chorus was under a certain value, then that segment would then be labeled a chorus.
+Now that we had the identified chorus, we looped through the detected segments from the segmenter and found the best matching segments to the detected chorus. Segments were matched using dynamic time warping (using a modified version of the algorithm from [https://pypi.org/project/fastdtw/](https://pypi.org/project/fastdtw/)). If the similarity between the segment and the detected chorus was under a certain value, then that segment would then be labeled a chorus.
 
 The other segments were determined through the previous labels given by the 2D Fourier Magnitude Coefficient labeling algorithm. If a segment was repeating but had not been labeled as a chorus, it was then labeled as a verse. If the segment was unique and in the middle of a song, it was considered a transition. If the first or final segments were unique, they were assigned as “intro” or “outro”, respectively.
 
