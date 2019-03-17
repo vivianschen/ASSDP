@@ -42,6 +42,7 @@ The chorus detector is a simplified version of an algorithm presented by a [pape
 </p>
 
 
+
 With the chorus identified, we looped through the detected segments from the segmenter and found the best matching segments to the detected chorus. Segments were matched using dynamic time warping (using a modified version of the algorithm from [https://pypi.org/project/fastdtw/](https://pypi.org/project/fastdtw/)). If the similarity between the segment and the detected chorus was under a certain value, then that segment would then be labeled a chorus.
 
 The remaining segments were determined through the previous labels given by the 2D Fourier Magnitude Coefficient labeling algorithm. If a segment was repeating but had not been labeled as a chorus, it was then labeled as a verse. If the segment was unique and in the middle of a song, it was considered a transition. If the first or final segments were unique, they were assigned as “intro” or “outro”, respectively.
