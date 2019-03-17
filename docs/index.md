@@ -18,14 +18,29 @@ Structure makes a song catchy providing a balance between repetition and variati
 
 We created our program by building off of two sources of code: Oriol Nieto's [song segmenter](https://github.com/urinieto/msaf) and Vivek Jayaram's [chorus detector](https://github.com/vivjay30/pychorus). For the former, we used MSAF to run a novelty-based segmentation and labeling algorithm. Specifically, this involved using the [checkerboard kernel method](https://www.fxpal.com/publications/automatic-audio-segmentation-using-a-measure-of-audio-novelty.pdf) of audio segmentation proposed by Jonathan Foote, and a [2D Fourier Magnitude Coefficients Method](http://www.mirlab.org/conference_papers/International_Conference/ICASSP%202014/papers/p664-nieto.pdf) as proposed by Oriol Nieto and Juan Pablo Bello. Running this algorithm on the song gives the perceived segments of a song and generic segment labels (1, 2, 1, 2, 3, etc.).
 
-<img src="images/igotaboyscreenshot.jpg" class="inline"/>
+<img src="images/igotaboyscreenshot.JPG" class="inline"/>
 <p>
     <em>Segments and labels determined for SNSD’s song “I Got a Boy”. The lines represent each perceived song segment, while the colors represent each perceived segment label.</em>
 </p>
 
+<img src="images/sinceubeengonescreenshot.JPG" class="inline"/>
+<p>
+    <em>Segments and labels determined for Kelly Clarkson’s song “Since You Been Gone”.</em>
+</p>
 
 
 The chorus detector is a simplified version of an algorithm presented by a [paper](https://staff.aist.go.jp/m.goto/PAPER/IEEETASLP200609goto.pdf) by Masatako Goto. However, the detector determines the chorus based on repetition (the more it repeated, the more likely it was a chorus), not on musical characteristics. This turned out to misidentify choruses on a large majority of songs, so we modified the algorithm to return all repeated segments. We then used [Librosa](https://librosa.github.io/librosa/)’s beat onset feature to identify which segment was most likely to be the chorus, using the logic that the segment with the highest average beat onset would be considered the chorus. 
+
+<img src="images/igotaboychroma.JPG" class="inline"/>
+<p>
+    <em>The time-time and denoised time-lag similarity matrices for “I Got a Boy”. The matrices are used to determine the repeating segments within a song.</em>
+</p>
+
+<img src="images/sinceubeengonechroma.JPG" class="inline"/>
+<p>
+    <em>The time-time and denoised time-lag similarity matrices for Kelly Clarkson's "Since You Been Gone".</em>
+</p>
+
 
 With the chorus identified, we looped through the detected segments from the segmenter and found the best matching segments to the detected chorus. Segments were matched using dynamic time warping (using a modified version of the algorithm from [https://pypi.org/project/fastdtw/](https://pypi.org/project/fastdtw/)). If the similarity between the segment and the detected chorus was under a certain value, then that segment would then be labeled a chorus.
 
