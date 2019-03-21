@@ -74,6 +74,15 @@ Here are some examples of comparisons of user labels vs. labels generated from o
     <source src="audio/sinceubeengone.ogg"></source> 
 </audio>
 
+In this result, the results are mostly in agreement with each other, and while the computer program split the song into more segments than the users, the location of the chorus, verses, and outro are mostly similar with the user results. 
+* Instrumental changes could have influenced oversegmenting
+    * Repeated vocal line, but with different instrumental background = changing onset beat strength
+* The mislabeling in this example can be attributed to the instrumental background holding more significance to the program than the vocal line
+    * Unclear why the first chorus is labelled as a verse, the other choruses were detected successfully
+    * The first half of the transition keeps the instrumental from the chorus, program identifies it as a chorus
+
+
+
 <br/><br/>
 
 <p>
