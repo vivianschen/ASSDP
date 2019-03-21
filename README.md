@@ -2,6 +2,9 @@
 ### Stacey Chao, Vivian Chen, Karen Bao
 ### EECS 352 Final Project
 
+https://vivianschen.github.io/ASSDP/
+
+
 ## Dependencies
 - numpy
 - scipy
