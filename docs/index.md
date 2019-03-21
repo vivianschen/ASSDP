@@ -2,7 +2,7 @@
 layout: default
 title: Automatic Song Structure Detection Program
 ---
-# A Study on Machine vs. Human Perception of Pop Song Structure
+## A Study on Machine vs. Human Perception of Pop Song Structure
 
 ### feat. Karen Bao, Stacey Chao, Vivian Chen <br/><br/>
 
@@ -90,6 +90,9 @@ Here are some examples of comparisons of user labels vs. labels generated from o
     <em>Song (Easy Korean): The Chaser – INFINITE</em>
 </p>
 <img src="images/chaser_screenshot.jpg" class="inline"/>
+<audio controls preload> 
+    <source src="audio/chaser.mp3"></source> 
+</audio>
 
 <br/><br/>
 
@@ -97,6 +100,9 @@ Here are some examples of comparisons of user labels vs. labels generated from o
     <em>Song (Difficult Chinese): Balloon – Peggy Hsu</em>
 </p>
 <img src="images/balloon_screenshot.jpg" class="inline"/>
+<audio controls preload> 
+    <source src="audio/balloon.mp3"></source> 
+</audio>
 
 <br/><br/>
 
@@ -105,6 +111,9 @@ Here are some examples of comparisons of user labels vs. labels generated from o
 </p>
 
 <img src="images/headphoneactor_screenshot.jpg" class="inline"/>
+<audio controls preload> 
+    <source src="audio/headphoneactor.mp3"></source> 
+</audio>
 
 
 
