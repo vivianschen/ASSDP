@@ -74,12 +74,7 @@ Here are some examples of comparisons of user labels vs. labels generated from o
     <source src="audio/sinceubeengone.ogg"></source> 
 </audio>
 
-In this result, the results are mostly in agreement with each other, and while the computer program split the song into more segments than the users, the location of the chorus, verses, and outro are mostly similar with the user results. 
-* Instrumental changes could have influenced oversegmenting
-    * Repeated vocal line, but with different instrumental background = changing onset beat strength
-* The mislabeling in this example can be attributed to the instrumental background holding more significance to the program than the vocal line
-    * Unclear why the first chorus is labelled as a verse, the other choruses were detected successfully
-    * The first half of the transition keeps the instrumental from the chorus, program identifies it as a chorus
+In this result, the results are mostly in agreement with each other, and while the computer program split the song into more segments than the users, the location of the chorus, verses, and outro are mostly similar with the user results. Instrumental changes could have influenced oversegmenting, as there would often be repeated vocal lines but with different instrumental background, and the increased onset often led to mislabelling as a chorus or transition. The mislabeling in this example can be attributed to the instrumental background holding more significance to the program than the vocal line. Another example of this occuring is in the first half of the transition, which the program identifies as a chorus due to the section keeping the chorus' instrumental.
 
 
 
@@ -92,6 +87,8 @@ In this result, the results are mostly in agreement with each other, and while t
 <audio controls preload> 
     <source src="audio/mouselovesrice.mp3"></source> 
 </audio>
+
+This is an example of how using onset beats to detect a chorus goes wrong - Halfway through the first verse, the melody repeats but the instrumental is replaced with the one found in the chorus. As a result, that part of the verse had the highest average beat onset, leading the program to label it as a chorus. Because the chorus had already been “detected”, the program was unable to identify the real chorus as the chorus, which is why it becomes mislabelled as a verse.
 
 <br/><br/>
 
@@ -123,6 +120,8 @@ In this result, the results are mostly in agreement with each other, and while t
 <audio controls preload> 
     <source src="audio/balloon.mp3"></source> 
 </audio>
+This result was an example of the largest number of user testings we had for a single song. It also demonstrates difficulty in providing the correct labels on the program’s part, although the sectioning was similar.
+Special case song = The verse sounds like a chorus , and the actual chorus has little to no motif in it (mostly accompanying sing scatting over the instrumental). Also, there was little to no instrumental change that could indicate section change.
 
 <br/><br/>
 
