@@ -94,15 +94,7 @@ This is an example of how using onset beats to detect a chorus goes wrong - Half
     <source src="audio/chaser.mp3"></source> 
 </audio>
 
-
-<p>
-    <em>Song (Difficult American): Losing My Religion – R.E.M</em>
-</p>
-<img src="images/losingmyreligion_screenshot.png" class="inline"/>
-<audio controls preload> 
-    <source src="audio/losingmyreligion.mp3"></source> 
-</audio>
-
+Labelled relatively similarly to users (verses and choruses match) but over-segmented, due to frequent change in instrumental. 
 
 <p>
     <em>Song (Difficult Chinese): Balloon – Peggy Hsu</em>
@@ -115,13 +107,14 @@ This result was an example of the largest number of user testings we had for a s
 Special case song = The verse sounds like a chorus , and the actual chorus has little to no motif in it (mostly accompanying sing scatting over the instrumental). Also, there was little to no instrumental change that could indicate section change.
 
 <p>
-    <em>Song (Difficult Japanese): Headphone Actor – Jin</em>
+    <em>Song (Difficult American): Losing My Religion – R.E.M</em>
 </p>
-<img src="images/headphoneactor_screenshot.jpg" class="inline"/>
+<img src="images/losingmyreligion_screenshot.png" class="inline"/>
 <audio controls preload> 
-    <source src="audio/headphoneactor.mp3"></source> 
+    <source src="audio/losingmyreligion.mp3"></source> 
 </audio>
 
+Another example in which neither the users nor the computer agree. These test cases were less about testing the accuracy of the computer and more about evaluating its comparison in performance to users when it is not clear to real listeners either. 
 
 <p>
     <em>Song (Difficult Japanese): Fairytale – Cilia</em>
@@ -131,6 +124,17 @@ Special case song = The verse sounds like a chorus , and the actual chorus has l
     <source src="audio/fairytale.mp3"></source> 
 </audio>
 
+This is an example of where neither the users nor the machine agree. In this example, the machine appears to be no further off than the choruses were, mostly labelling a mixture of choruses and verses. The main problem in this example stemmed from users labelling gaps between verses as transitions, although they tended to be too short for the machine to detect it as a whole new section. Furthermore, further work needs to be done to define the intro and outro as things that don’t contain a central vocal line.
+
+<p>
+    <em>Song (Difficult Japanese): Headphone Actor – Jin</em>
+</p>
+<img src="images/headphoneactor_screenshot.jpg" class="inline"/>
+<audio controls preload> 
+    <source src="audio/headphoneactor.mp3"></source> 
+</audio>
+
+Another example of some mislabelling but similar section divisions. This song proved to be a challenge for the user testers, in that the structure of the song is unpredictable and difficult to pinpoint in the first few listens. For example, the first two sections labelled by the users and program are meant to be the intro - however, the users may have had the misconception that an intro is supposed to be purely instrumental. 
 
 <br/><br/>
 
