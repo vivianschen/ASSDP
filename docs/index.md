@@ -66,7 +66,7 @@ The user’s task was to give the start and stop timestamps of each particular s
 Here are some examples of comparisons of user labels vs. labels generated from our program. The labels generated from the program are always the labels on the last row (see screenshots). See what you agree with!
 
 
-<img src="images/sinceubeengone_screenshot.JPG" class="inline"/>
+<img src="images/sinceubeengone_screenshot.jpg" class="inline"/>
 
 <audio controls preload> 
     <source src="audio/sinceubeengone.mp3"></source>
@@ -78,7 +78,7 @@ Here are some examples of comparisons of user labels vs. labels generated from o
 </p>
 
 
-<img src="images/mouselovesrice_screenshot.JPG" class="inline"/>
+<img src="images/mouselovesrice_screenshot.jpg" class="inline"/>
 
 <audio controls preload> 
     <source src="audio/mouselovesrice.mp3"></source> 
@@ -87,6 +87,24 @@ Here are some examples of comparisons of user labels vs. labels generated from o
 <p>
     <em>Song (Easy Chinese): Mouse Loves Rice – Yang Chengang</em>
 </p>
+
+
+
+<img src="images/chaser_screenshot.jpg" class="inline"/>
+
+
+
+
+
+<img src="images/balloon_screenshot.jpg" class="inline"/>
+
+
+
+<img src="images/headphoneactor_screenshot.jpg" class="inline"/>
+
+
+
+
 
 
 ## Future Work
