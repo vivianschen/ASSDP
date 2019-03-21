@@ -1,11 +1,11 @@
 # Automatic Song Structure Detection Program
-### Stacey Chao, Vivien Chen, Karen Bao
+### Stacey Chao, Vivian Chen, Karen Bao
 ### EECS 352 Final Project
 
 ## Dependencies
 - numpy
 - scipy
-- librosa
+- [librosa](https://librosa.github.io/librosa/)
 - matplotlib
 - [pychorus](https://github.com/vivjay30/pychorus)
 - [MSAF](https://github.com/urinieto/msaf)
