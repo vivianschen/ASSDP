@@ -66,7 +66,7 @@ The user’s task was to give the start and stop timestamps of each particular s
 Here are some examples of comparisons of user labels vs. labels generated from our program. The labels generated from the program are always the labels on the last row (see screenshots). See what you agree with!
 
 
-<img src="images/sinceubeengonescreenshot.JPG" class="inline"/>
+<img src="images/sinceubeengone_screenshot.JPG" class="inline"/>
 
 <audio controls preload> 
     <source src="audio/sinceubeengone.mp3"></source>
