@@ -71,14 +71,9 @@ Here are some examples of comparisons of user labels vs. labels generated from o
 <img src="images/sinceubeengone_screenshot.jpg" class="inline"/>
 <audio controls preload> 
     <source src="audio/sinceubeengone.mp3"></source>
-    <source src="audio/sinceubeengone.ogg"></source> 
 </audio>
 
 In this result, the results are mostly in agreement with each other, and while the computer program split the song into more segments than the users, the location of the chorus, verses, and outro are mostly similar with the user results. Instrumental changes could have influenced oversegmenting, as there would often be repeated vocal lines but with different instrumental background, and the increased onset often led to mislabelling as a chorus or transition. The mislabeling in this example can be attributed to the instrumental background holding more significance to the program than the vocal line. Another example of this occuring is in the first half of the transition, which the program identifies as a chorus due to the section keeping the chorus' instrumental.
-
-
-
-<br/><br/>
 
 <p>
     <em>Song (Easy Chinese): Mouse Loves Rice – Yang Chengang</em>
@@ -90,7 +85,6 @@ In this result, the results are mostly in agreement with each other, and while t
 
 This is an example of how using onset beats to detect a chorus goes wrong - Halfway through the first verse, the melody repeats but the instrumental is replaced with the one found in the chorus. As a result, that part of the verse had the highest average beat onset, leading the program to label it as a chorus. Because the chorus had already been “detected”, the program was unable to identify the real chorus as the chorus, which is why it becomes mislabelled as a verse.
 
-<br/><br/>
 
 <p>
     <em>Song (Easy Korean): The Chaser – INFINITE</em>
@@ -100,7 +94,6 @@ This is an example of how using onset beats to detect a chorus goes wrong - Half
     <source src="audio/chaser.mp3"></source> 
 </audio>
 
-<br/><br/>
 
 <p>
     <em>Song (Difficult American): Losing My Religion – R.E.M</em>
@@ -109,8 +102,6 @@ This is an example of how using onset beats to detect a chorus goes wrong - Half
 <audio controls preload> 
     <source src="audio/losingmyreligion.mp3"></source> 
 </audio>
-
-<br/><br/>
 
 
 <p>
@@ -123,8 +114,6 @@ This is an example of how using onset beats to detect a chorus goes wrong - Half
 This result was an example of the largest number of user testings we had for a single song. It also demonstrates difficulty in providing the correct labels on the program’s part, although the sectioning was similar.
 Special case song = The verse sounds like a chorus , and the actual chorus has little to no motif in it (mostly accompanying sing scatting over the instrumental). Also, there was little to no instrumental change that could indicate section change.
 
-<br/><br/>
-
 <p>
     <em>Song (Difficult Japanese): Headphone Actor – Jin</em>
 </p>
@@ -134,13 +123,10 @@ Special case song = The verse sounds like a chorus , and the actual chorus has l
 </audio>
 
 
-<br/><br/>
-
-
 <p>
     <em>Song (Difficult Japanese): Fairytale – Cilia</em>
 </p>
-<img src="images/fairytale_screenshot.jpg" class="inline"/>
+<img src="images/fairytale_screenshot.png" class="inline"/>
 <audio controls preload> 
     <source src="audio/fairytale.mp3"></source> 
 </audio>
