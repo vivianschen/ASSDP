@@ -97,6 +97,17 @@ Here are some examples of comparisons of user labels vs. labels generated from o
 <br/><br/>
 
 <p>
+    <em>Song (Difficult American): Bohemian Rhapsody – Queen</em>
+</p>
+<img src="images/bohemian_rhapsody_screenshot.png" class="inline"/>
+<audio controls preload> 
+    <source src="audio/bohemian_rhapsody.mp3"></source> 
+</audio>
+
+<br/><br/>
+
+
+<p>
     <em>Song (Difficult Chinese): Balloon – Peggy Hsu</em>
 </p>
 <img src="images/balloon_screenshot.jpg" class="inline"/>
@@ -109,15 +120,13 @@ Here are some examples of comparisons of user labels vs. labels generated from o
 <p>
     <em>Song (Difficult Japanese): Headphone Actor – Jin</em>
 </p>
-
 <img src="images/headphoneactor_screenshot.jpg" class="inline"/>
 <audio controls preload> 
     <source src="audio/headphoneactor.mp3"></source> 
 </audio>
 
 
-
-
+<br/><br/>
 
 
 ## Future Work
