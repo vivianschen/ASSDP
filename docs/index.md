@@ -103,11 +103,11 @@ This is an example of how using onset beats to detect a chorus goes wrong - Half
 <br/><br/>
 
 <p>
-    <em>Song (Difficult American): Bohemian Rhapsody – Queen</em>
+    <em>Song (Difficult American): Losing My Religion – R.E.M</em>
 </p>
-<img src="images/bohemian_rhapsody_screenshot.png" class="inline"/>
+<img src="images/losingmyreligion_screenshot.png" class="inline"/>
 <audio controls preload> 
-    <source src="audio/bohemian_rhapsody.mp3"></source> 
+    <source src="audio/losingmyreligion.mp3"></source> 
 </audio>
 
 <br/><br/>
@@ -136,6 +136,17 @@ Special case song = The verse sounds like a chorus , and the actual chorus has l
 
 <br/><br/>
 
+
+<p>
+    <em>Song (Difficult Japanese): Fairytale – Cilia</em>
+</p>
+<img src="images/fairytale_screenshot.jpg" class="inline"/>
+<audio controls preload> 
+    <source src="audio/fairytale.mp3"></source> 
+</audio>
+
+
+<br/><br/>
 
 ## Future Work
 
