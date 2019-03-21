@@ -65,40 +65,43 @@ The user’s task was to give the start and stop timestamps of each particular s
 
 Here are some examples of comparisons of user labels vs. labels generated from our program. The labels generated from the program are always the labels on the last row (see screenshots). See what you agree with!
 
-
+<p>
+    <em>Song (Easy American): Since You Been Gone – Kelly Clarkson</em>
+</p>
 <img src="images/sinceubeengone_screenshot.jpg" class="inline"/>
-
 <audio controls preload> 
     <source src="audio/sinceubeengone.mp3"></source>
     <source src="audio/sinceubeengone.ogg"></source> 
 </audio>
 
-<p>
-    <em>Song (Easy American): Since You Been Gone – Kelly Clarkson</em>
-</p>
 
-
-<img src="images/mouselovesrice_screenshot.jpg" class="inline"/>
-
-<audio controls preload> 
-    <source src="audio/mouselovesrice.mp3"></source> 
-</audio>
 
 <p>
     <em>Song (Easy Chinese): Mouse Loves Rice – Yang Chengang</em>
 </p>
+<img src="images/mouselovesrice_screenshot.jpg" class="inline"/>
+<audio controls preload> 
+    <source src="audio/mouselovesrice.mp3"></source> 
+</audio>
 
 
-
+<p>
+    <em>Song (Easy Korean): The Chaser – INFINITE</em>
+</p>
 <img src="images/chaser_screenshot.jpg" class="inline"/>
 
 
 
 
-
+<p>
+    <em>Song (Difficult Chinese): Balloon – Peggy Hsu</em>
+</p>
 <img src="images/balloon_screenshot.jpg" class="inline"/>
 
 
+<p>
+    <em>Song (Difficult Japanese): Headphone Actor – Jin</em>
+</p>
 
 <img src="images/headphoneactor_screenshot.jpg" class="inline"/>
 
