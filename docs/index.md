@@ -73,7 +73,7 @@ Here are some examples of comparisons of user labels vs. labels generated from o
     <source src="audio/sinceubeengone.mp3"></source>
 </audio>
 
-In this result, the results are mostly in agreement with each other, and while the computer program split the song into more segments than the users, the location of the chorus, verses, and outro are mostly similar with the user results. Instrumental changes could have influenced oversegmenting, as there would often be repeated vocal lines but with different instrumental background, and the increased onset often led to mislabelling as a chorus or transition. The mislabeling in this example can be attributed to the instrumental background holding more significance to the program than the vocal line. Another example of this occuring is in the first half of the transition, which the program identifies as a chorus due to the section keeping the chorus' instrumental.
+The user and program results are mostly in agreement with each other. While the program splits the song into more segments than the users, the location of the chorus, verses, and outro are mostly similar with the user results. Instrumental changes could have influenced oversegmenting, as there would often be repeated vocal lines but with different instrumental background, and the increased onset often led to mislabelling as a chorus or transition. The mislabeling in this example can be attributed to the instrumental background holding more significance to the program than the vocal line. Another example of this occuring is in the first half of the transition, which the program identifies as a chorus due to the section keeping the chorus' instrumental.
 
 <p>
     <em>Song (Easy Chinese): Mouse Loves Rice – Yang Chengang</em>
@@ -83,7 +83,7 @@ In this result, the results are mostly in agreement with each other, and while t
     <source src="audio/mouselovesrice.mp3"></source> 
 </audio>
 
-This is an example of how using onset beats to detect a chorus goes wrong - Halfway through the first verse, the melody repeats but the instrumental is replaced with the one found in the chorus. As a result, that part of the verse had the highest average beat onset, leading the program to label it as a chorus. Because the chorus had already been “detected”, the program was unable to identify the real chorus as the chorus, which is why it becomes mislabelled as a verse.
+This is an example of how using onset beats to detect a chorus goes wrong. Halfway through the first verse, the melody repeats but the instrumental is replaced with the one found in the chorus. As a result, that part of the verse had the highest average beat onset, leading the program to label it as a chorus. Because the chorus had already been “detected”, the program was unable to identify the real chorus as the chorus, which is why it becomes mislabelled as a verse.
 
 
 <p>
@@ -93,8 +93,7 @@ This is an example of how using onset beats to detect a chorus goes wrong - Half
 <audio controls preload> 
     <source src="audio/chaser.mp3"></source> 
 </audio>
-
-Labelled relatively similarly to users (verses and choruses match) but over-segmented, due to frequent change in instrumental. 
+Example of how the program often oversegments the audio due to frequent change in instrumental. 
 
 <p>
     <em>Song (Difficult Chinese): Balloon – Peggy Hsu</em>
@@ -104,17 +103,7 @@ Labelled relatively similarly to users (verses and choruses match) but over-segm
     <source src="audio/balloon.mp3"></source> 
 </audio>
 This result was an example of the largest number of user testings we had for a single song. It also demonstrates difficulty in providing the correct labels on the program’s part, although the sectioning was similar.
-Special case song = The verse sounds like a chorus , and the actual chorus has little to no motif in it (mostly accompanying sing scatting over the instrumental). Also, there was little to no instrumental change that could indicate section change.
-
-<p>
-    <em>Song (Difficult American): Losing My Religion – R.E.M</em>
-</p>
-<img src="images/losingmyreligion_screenshot.png" class="inline"/>
-<audio controls preload> 
-    <source src="audio/losingmyreligion.mp3"></source> 
-</audio>
-
-Another example in which neither the users nor the computer agree. These test cases were less about testing the accuracy of the computer and more about evaluating its comparison in performance to users when it is not clear to real listeners either. 
+This song was a special case - The verse sounds like a chorus , and the actual chorus has little to no motif in it (primarily instrumental with accompanying vocal fills). Also, there was little to no instrumental change that could indicate section change, so the vocal motif in the verse was what most defined the song structure for users. Since the labelling algorithm places little emphasis on the vocal melody, the program had more trouble with this song than the users.
 
 <p>
     <em>Song (Difficult Japanese): Fairytale – Cilia</em>
@@ -127,6 +116,16 @@ Another example in which neither the users nor the computer agree. These test ca
 This is an example of where neither the users nor the machine agree. In this example, the machine appears to be no further off than the choruses were, mostly labelling a mixture of choruses and verses. The main problem in this example stemmed from users labelling gaps between verses as transitions, although they tended to be too short for the machine to detect it as a whole new section. Furthermore, further work needs to be done to define the intro and outro as things that don’t contain a central vocal line.
 
 <p>
+    <em>Song (Difficult American): Losing My Religion – R.E.M</em>
+</p>
+<img src="images/losingmyreligion_screenshot.png" class="inline"/>
+<audio controls preload> 
+    <source src="audio/losingmyreligion.mp3"></source> 
+</audio>
+
+Another example in which neither the users nor the computer agree. These test cases were less about testing the accuracy of the computer and more about evaluating its comparison in performance to users when it is not clear to real listeners either. In particular, users disagreed on how many sections there were, and what diferentiated verse from chorus. 
+
+<p>
     <em>Song (Difficult Japanese): Headphone Actor – Jin</em>
 </p>
 <img src="images/headphoneactor_screenshot.jpg" class="inline"/>
@@ -134,7 +133,7 @@ This is an example of where neither the users nor the machine agree. In this exa
     <source src="audio/headphoneactor.mp3"></source> 
 </audio>
 
-Another example of some mislabelling but similar section divisions. This song proved to be a challenge for the user testers, in that the structure of the song is unpredictable and difficult to pinpoint in the first few listens. For example, the first two sections labelled by the users and program are meant to be the intro - however, the users may have had the misconception that an intro is supposed to be purely instrumental. 
+This song proved to be a challenge for the user testers, in that the structure of the song is unpredictable and difficult to pinpoint in the first few listens. For example, the first two sections labelled by the users and program are meant to be the intro - however, the users may have had the misconception that an intro is supposed to be purely instrumental. 
 
 <br/><br/>
 
