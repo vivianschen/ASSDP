@@ -102,8 +102,10 @@ Example of how the program often oversegments the audio due to frequent change i
 <audio controls preload> 
     <source src="audio/balloon.mp3"></source> 
 </audio>
+
 This result was an example of the largest number of user testings we had for a single song. It also demonstrates difficulty in providing the correct labels on the program’s part, although the sectioning was similar.
 This song was a special case - The verse sounds like a chorus , and the actual chorus has little to no motif in it (primarily instrumental with accompanying vocal fills). Also, there was little to no instrumental change that could indicate section change, so the vocal motif in the verse was what most defined the song structure for users. Since the labelling algorithm places little emphasis on the vocal melody, the program had more trouble with this song than the users.
+
 
 <p>
     <em>Song (Difficult Japanese): Fairytale – Cilia</em>
@@ -126,16 +128,7 @@ This is an example of where neither the users nor the machine agree. In this exa
 Another example in which neither the users nor the computer agree. These test cases were less about testing the accuracy of the computer and more about evaluating its comparison in performance to users when it is not clear to real listeners either. In particular, users disagreed on how many sections there were, and what diferentiated verse from chorus. 
 
 <p>
-    <em>Song (Difficult Japanese): Headphone Actor – Jin</em>
-</p>
-<img src="images/headphoneactor_screenshot.jpg" class="inline"/>
-<audio controls preload> 
-    <source src="audio/headphoneactor.mp3"></source> 
-</audio>
 
-This song proved to be a challenge for the user testers, in that the structure of the song is unpredictable and difficult to pinpoint in the first few listens. For example, the first two sections labelled by the users and program are meant to be the intro - however, the users may have had the misconception that an intro is supposed to be purely instrumental. 
-
-<br/><br/>
 
 ## Future Work
 
