@@ -93,7 +93,9 @@ This is an example of how using onset beats to detect a chorus goes wrong. Halfw
 <audio controls preload> 
     <source src="audio/chaser.mp3"></source> 
 </audio>
+
 Example of how the program often oversegments the audio due to frequent change in instrumental. 
+
 
 <p>
     <em>Song (Difficult Chinese): Balloon – Peggy Hsu</em>
