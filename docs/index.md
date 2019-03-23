@@ -142,3 +142,6 @@ People have extremely different ideas of how a song is structured, especially fo
 
 
 <img src="images/presentation_day.jpg" class="inline"/>
+<p>
+    <em>Poster day 3/22! Minus Stacey :( </em>
+</p>
